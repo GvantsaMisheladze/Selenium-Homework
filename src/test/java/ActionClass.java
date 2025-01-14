@@ -3,6 +3,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class ActionClass {
     public static void main(String[] args) throws InterruptedException {
@@ -12,8 +16,10 @@ public class ActionClass {
         Actions action = new Actions(driver);
         WebElement element = driver.findElement(By.id("toolTipButton"));
         action.moveToElement(element).click().perform();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement tooltip = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".tooltip-inner")));
 
-        String tooltipText = element.getText();
+        String tooltipText = tooltip.getText();
         assert tooltipText.equals("You hovered over the button!") : "Tooltip text is incorrect. Expected: 'You hovered over the button!', but got: " + tooltipText;
 
         driver.quit();
