@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Regression Suite" parallel="tests" thread-count="3">
+    <test name="Web Tables Test">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="Tests.WebTablesTests"/>
+        </classes>
+    </test>
+
+    <test name="Action Class Test">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="Tests.ActionClassTests"/>
+        </classes>
+    </test>
+
+    <test name="Robot Class Test">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="Tests.RobotClassTests"/>
+        </classes>
+    </test>
+</suite>
