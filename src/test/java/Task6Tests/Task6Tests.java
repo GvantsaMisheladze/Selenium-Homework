@@ -5,8 +5,6 @@ import Page.ToolTipPage;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import Page.TablesPage;
-import Page.ToolTipPage;
 import Page.GoogleSearchPage;
 
 import java.awt.*;
@@ -21,16 +19,19 @@ public class Task6Tests {
     }
 
     @Test
-    public void testTablePage() {
+    public void testWebTable() {
         open("https://the-internet.herokuapp.com/tables");
-        TablesPage tablePage = new TablesPage();
 
-        tablePage.printUserData();
-        String balance = tablePage.getUserBalance("Frank");
-        System.out.println("Frank's balance: " + balance);
+        TablesPage webTablesPage = new TablesPage();
+        webTablesPage.printUserData();
 
-        boolean isFrankPresent = tablePage.isUserPresent("Frank");
-        System.out.println("Is Frank present: " + isFrankPresent);
+        boolean frankExists = webTablesPage.isUserPresent("Frank");
+
+        if (frankExists) {
+            System.out.println("User Frank found in the table.");
+        } else {
+            System.out.println("User Frank not found in the table.");
+        }
     }
 
     @Test

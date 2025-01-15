@@ -2,26 +2,38 @@ package Page;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-
 import static com.codeborne.selenide.Selenide.*;
 
 public class TablesPage {
 
-    private final SelenideElement exampleTable = $("#table1");
+    private final SelenideElement table = $("#table1");
 
-    public String getUserBalance(String userName) {
-        return exampleTable.$x(".//tr[td[text()='" + userName + "']]/td[4]").getText();
-    }
-
-    public boolean isUserPresent(String userName) {
-        return exampleTable.$x(".//tr[td[text()='" + userName + "']]").exists();
+    public ElementsCollection getRows() {
+        return table.$$("tr");
     }
 
     public void printUserData() {
-        ElementsCollection rows = exampleTable.$$("tr");
-        rows.forEach(row -> {
-            String rowText = row.$$("td").texts().toString();
-            System.out.println(rowText);
-        });
+        ElementsCollection rows = getRows();
+
+        for (int i = 1; i < rows.size(); i++) {
+            ElementsCollection columns = rows.get(i).$$("td");
+
+            String name = columns.get(1).getText();
+            String balance = columns.get(3).getText();
+
+            System.out.println("Name: " + name + ", Balance: " + balance);
+        }
+    }
+
+    public boolean isUserPresent(String userName) {
+        ElementsCollection rows = getRows();
+        for (int i = 1; i < rows.size(); i++) {
+            ElementsCollection columns = rows.get(i).$$("td");
+            String name = columns.get(1).getText();
+            if (name.equals(userName)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
