@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Regression Suite" parallel="tests" thread-count="3">
+    <test name="Online Shop Class Test">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="Tests.OnlineShopTests"/>
+        </classes>
+    </test>
+</suite>
